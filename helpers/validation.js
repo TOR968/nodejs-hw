@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { HttpCode } = require('../service/constants');
+const { HttpCode } = require('../helpers/constants');
 
 const schemaValidateContact = Joi.object({
   name: Joi.string().alphanum().min(3).max(30),
