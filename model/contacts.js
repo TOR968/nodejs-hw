@@ -24,11 +24,14 @@ const listContacts = async (
   return { total: total.toString(), page, limit, contacts };
 };
 
-const getContactById = async (userId, contactId) => {
+const getContactById = async (contactId, userId) => {
   const data = await Contact.findOne({
-    owner: userId,
     _id: contactId,
-  }).populate({ path: 'owner', select: 'email subscription -_id' });
+    owner: userId,
+  }).populate({
+    path: 'owner',
+    select: 'email subscription -_id',
+  });
   return data;
 };
 
@@ -37,19 +40,19 @@ const addContact = async body => {
   return data;
 };
 
-const updateContact = async (userId, contactId, body) => {
+const updateContact = async (contactId, body, userId) => {
   const data = await Contact.findByIdAndUpdate(
-    { owner: userId, _id: contactId },
+    { _id: contactId, owner: userId },
     { ...body },
     { new: true },
   );
   return data;
 };
 
-const removeContact = async (userId, contactId) => {
+const removeContact = async (contactId, userId) => {
   const data = await Contact.findByIdAndRemove({
-    owner: userId,
     _id: contactId,
+    owner: userId,
   });
   return data;
 };
