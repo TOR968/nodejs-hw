@@ -1,0 +1,5 @@
+{
+  "dev": "http://localhost:3000",
+  "stage": "https://cats-stage.heroku.com",
+  "prod": "https://cats.heroku.com"
+}
